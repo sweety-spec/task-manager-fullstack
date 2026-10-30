@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Patrick+Hand&display=swap');
+
+.sheet {
+  position: relative;
+  max-width: 640px;
+  margin: 72px auto 56px;
+  padding: 44px 40px 36px 88px;
+  background: var(--paper);
+  border-radius: 4px;
+  transform: rotate(-0.6deg);
+  box-shadow: 0 22px 40px -24px rgba(27, 37, 71, 0.45),
+    0 2px 5px rgba(27, 37, 71, 0.14);
+}
+
+/* the pink margin line */
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 66px;
+  width: 2px;
+  background: var(--margin);
+  opacity: 0.65;
+}
+
+.sheet button:focus-visible,
+.add input:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+h1 {
+  position: relative;
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* tape holding the page down */
+h1::before {
+  content: '';
+  position: absolute;
+  top: -66px;
+  left: 38%;
+  width: 130px;
+  height: 36px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 227, 92, 0.85) 0 10px,
+    rgba(255, 244, 168, 0.85) 10px 20px
+  );
+  transform: rotate(3deg);
+  clip-path: polygon(0 8%, 4% 0, 8% 10%, 12% 0, 100% 0, 96% 50%, 100% 100%, 12% 100%, 8% 88%, 4% 100%, 0 92%, 3% 50%);
+  filter: drop-shadow(0 2px 2px rgba(27, 37, 71, 0.25));
+}
+
+.summary {
+  margin: 10px 0 28px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.35rem;
+  color: var(--muted);
+}
+
+/* add form */
+.add {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.add input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 2px;
+  border: 0;
+  border-bottom: 2px solid var(--ink);
+  background: transparent;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.4rem;
+  color: var(--ink);
+}
+
+.add input::placeholder { color: var(--muted); }
+
+.add button {
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.add button:active { transform: translateY(1px); }
+
+.error {
+  margin: 14px 0 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  color: #b3173f;
+}
+
+/* filters */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin: 30px 0 6px;
+}
+
+.filters button {
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.filters button[aria-pressed='true'] {
+  color: var(--ink);
+  background: linear-gradient(transparent 60%, var(--marker) 60%);
+}
+
+.filters span { margin-left: 4px; opacity: 0.7; }
+
+/* task list */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.tick {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.tick svg { opacity: 0; transition: opacity 0.15s; }
+
+.label {
+  padding: 4px 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  word-break: break-word;
+  background-image: linear-gradient(
+    transparent 52%,
+    var(--marker) 52% 88%,
+    transparent 88%
+  );
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 0.35s ease;
+}
+
+.row.is-done .tick { background: var(--ink); }
+.row.is-done .tick svg { opacity: 1; }
+
+.row.is-done .label {
+  color: var(--muted);
+  background-size: 100% 100%;
+  text-decoration: line-through;
+  text-decoration-color: rgba(27, 37, 71, 0.45);
+}
+
+.remove {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.row:hover .remove,
+.row:focus-within .remove { opacity: 1; }
+
+.remove:hover {
+  color: #b3173f;
+  background: rgba(255, 107, 138, 0.15);
+}
+
+@media (hover: none) {
+  .remove { opacity: 1; }
+}
+
+.empty {
+  margin: 0;
+  padding: 22px 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.4rem;
+  color: var(--muted);
+}
+
+/* progress */
+.progress { margin-top: 26px; }
+
+.bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.4s ease;
+}
+
+.progress p {
+  margin: 8px 0 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+/* stamp when everything is done */
+.stamp {
+  position: absolute;
+  top: 34px;
+  right: 28px;
+  padding: 6px 14px;
+  border: 3px solid var(--margin);
+  border-radius: 8px;
+  color: var(--margin);
+  font-size: 1.2rem;
+  font-weight: 800;
+  transform: rotate(-9deg);
+  pointer-events: none;
+  animation: stamp 0.35s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+
+@keyframes stamp {
+  from { transform: rotate(-9deg) scale(1.8); opacity: 0; }
+  to { transform: rotate(-9deg) scale(1); opacity: 1; }
+}
+
+/* phones */
+@media (max-width: 560px) {
+  .sheet {
+    margin: 0;
+    min-height: 100vh;
+    padding: 36px 18px 28px 58px;
+    border-radius: 0;
+    transform: none;
+  }
+  .sheet::before { left: 40px; }
+  h1::before { display: none; }
+  .stamp { top: 14px; right: 12px; font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

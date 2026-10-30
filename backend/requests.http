@@ -1,0 +1,35 @@
+### 1. Create first task
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{"title": "Learn Express"}
+
+### 2. Create second task
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{"title": "Build React frontend"}
+
+### 3. Get all tasks
+GET http://localhost:3000/api/tasks
+
+### 4. Get one task
+GET http://localhost:3000/api/tasks/1
+
+### 5. Mark task 1 as done
+PUT http://localhost:3000/api/tasks/1
+Content-Type: application/json
+
+{"done": true}
+
+### 6. Invalid input (expect 400)
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{}
+
+### 7. Task not found (expect 404)
+GET http://localhost:3000/api/tasks/99
+
+### 8. Delete task 2
+DELETE http://localhost:3000/api/tasks/2
