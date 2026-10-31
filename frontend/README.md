@@ -22,7 +22,7 @@ React, Vite, plain CSS
 - Conditional rendering (empty states, errors, "All clear" stamp)
 
 ## Setup
-1. Start the backend API (see the `task-manager-api` repository):
+1. Start the backend API (see the `backend` repository):
    ```
    node src/server.js
    ```
