@@ -13,7 +13,7 @@ Node.js, Express
 
 ## Project Structure
 ```
-task-manager-api/
+backend/
 ├── src/
 │   ├── server.js          # starts the server
 │   ├── app.js             # configures Express and middleware
